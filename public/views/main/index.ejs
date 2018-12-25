@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h2 class="d-inline text-left">Gallery</h2>
+    <p class="d-inline float-right pt-1"><span class="text-muted">Gallery Source:</span> <a href="https://picsum.photos/">Lorem
+        Picsum</a></p>
+    <div class="container-fluid p-2">
+      <% var totalImages = pictures.length; var offset = 0; if(pageNumber > 1){ var offset= 9 * (pageNumber-1) ; }%>
+      <% var counter = 1; %>
+      <% for(let i = 1; i < 10; i++){%>
+      <% if(counter == 1){%>
+      <div class="row">
+        <% } %>
+        <% var indexOfData = i + offset; %>
+        <div class="p-2 text-center col col-4">
+          <% if(indexOfData < totalImages){%>
+          <a target="_blank" href="https://picsum.photos/<%=pictures[indexOfData].width%>/<%=pictures[indexOfData].height%>/?image=<%=[indexOfData]%>"><img
+              src="https://picsum.photos/2500/2500/?image=<%=[indexOfData]%>" class="img-fluid"></a>
+          <p>By: <a target="_blank" href="<%=pictures[indexOfData].author_url%>">
+              <%=pictures[indexOfData].author%></a></p>
+          <% } %>
+        </div>
+        <% if(counter == 3){%>
+      </div>
+      <% {counter = 0};} %>
+      <% counter++;} %>
+      <div class="row">
+        <div class="col col-4">
+          <p class="text-left"><a class="btn btn-primary <% if(pageNumber == 1){ %>disabled<% } %>" href="<% if(pageNumber == 1){ %>#<% }else{%>/?page=<%=parseInt(pageNumber)-1%><%} %>">Prev</a></p>
+        </div>
+        <div class="col col-4">
+          <p class="text-center">Page
+            <%= pageNumber %> of
+            <%= Math.ceil(totalImages/9) %>
+          </p>
+        </div>
+        <div class="col col-4">
+          <p class="text-right"><a class="btn btn-primary <% if(pageNumber == Math.ceil(totalImages/9)){ %> disabled <% } %>"
+              href="<% if(pageNumber == Math.ceil(totalImages/9)){ %>#<% }else{%>/?page=<%=parseInt(pageNumber)+1%> <%} %>">Next</a></p>
+        </div>
+      </div>
+    </div>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+</body>
+</html>
